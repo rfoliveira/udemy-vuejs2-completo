@@ -1,0 +1,51 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <button @click="aumentar">Aumentar</button>
+    <button @click="diminuir">Diminuir</button>
+    <button @click="contador2++">Aumentar2</button>
+    <p>Contador: {{ contador }} | {{ contador2 }}</p>
+
+    <!-- Como método normal -->
+    <!-- <p>Resultado: {{ resultado() }}</p> -->
+    
+    <!-- Como função computada -->
+    <p>Resultado: {{ resultado }}</p>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0,
+            contador2: 0,
+            // resultado: 0
+        },
+        methods: {
+            aumentar() {
+                this.contador++;
+                // this.resultado = this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5';
+            },
+            aumentar2() {
+                this.contador += 2;
+                // this.resultado = this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5';
+            },
+            diminuir() {
+                this.contador--;                
+            }//,
+            // resultado() {
+            //     // Devido ao contador2 estar associado ao contador na linha <p>
+            //     // este também é considerado ao clicar pra aumentar2...
+            //     console.log('função resultado() chamada');
+            //     return this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5';
+            // }
+        },
+        computed: {
+            resultado() {
+                // Dessa forma só será chamado pelo aumentar e não mais pelo aumentar2
+                console.log('função computada resultado() chamada');
+                return this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5';
+            }
+        }
+    })
+</script>
