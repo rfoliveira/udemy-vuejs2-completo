@@ -1,0 +1,52 @@
+<meta charset="utf-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <ul>
+        <!-- 
+            Para acrescentar uma propriedade à tag do for,
+            basta colocar :teste="cor", ficando assim:
+            <li teste="vermelho">vermelho</li>
+            <li teste="verde">verde</li>
+            <li teste="amarelo">amarelo</li>
+        -->
+        <!-- <li v-for="cor in cores">{{cor}}</li> -->
+        <!-- 
+            Especificando um índice
+        -->
+        <!-- <li v-for="(cor, i) in cores">{{ i + 1 }} - {{cor}}</li> -->
+    </ul>
+    <!--
+        O mesmo se aplica a um template
+    --> 
+    <template v-for="(cor, i) in cores">
+        <p>{{ i + 1 }}) {{ cor }}</p>
+    </template>
+    <hr>
+    <ul>
+        <li v-for="pessoa in pessoas">
+            <span v-for="(valor, chave, index) in pessoa">
+                {{ index + 1 }}) {{ chave }} = {{ valor }}
+            </span>
+        </li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            cores: ['vermelho', 'verde', 'amarelo'],
+            pessoas: [
+                { nome: 'Ana', idade: 26, peso: 59 },
+                { nome: 'Guilherme', idade: 22, peso: 89 }
+            ]
+        }
+    })
+</script>
+
+<style>
+    ul {
+        list-style: none;
+    }
+</style>
