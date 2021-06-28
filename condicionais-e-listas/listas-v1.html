@@ -19,17 +19,28 @@
     <!--
         O mesmo se aplica a um template
     --> 
-    <template v-for="(cor, i) in cores">
+    <!-- <template v-for="(cor, i) in cores">
         <p>{{ i + 1 }}) {{ cor }}</p>
     </template>
-    <hr>
-    <ul>
+    <hr> -->
+    <!-- <ul>
         <li v-for="pessoa in pessoas">
             <span v-for="(valor, chave, index) in pessoa">
                 {{ index + 1 }}) {{ chave }} = {{ valor }}
             </span>
         </li>
     </ul>
+    <hr>
+    <span v-for="n in 10">{{ n }}</span>
+    <hr> -->
+    <!-- 
+        Com :key, você define um valor para ser usado como chave para
+        identificação da linha
+    -->
+    <ul>
+        <li v-for="(cor, i) in cores" :key="cor">{{ i + 1 }}) {{ cor }}</li>
+    </ul>
+    <button @click="cores.push('branco')">Adicionar branco</button> 
 </div>
 
 <script>
