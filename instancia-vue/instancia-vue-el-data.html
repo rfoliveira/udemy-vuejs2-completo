@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    {{ titulo }}
+    <button @click="alterar">Alterar</button>
+</div>
+
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Teste 1'
+        },
+        methods: {
+            alterar() {
+                this.titulo += ' alterado';
+            }
+        }
+    });
+
+    /*
+        No console do browser ao obter o valor de vm,
+        irá retornar todo o objeto Vue.
+        $el = ao elemento onde está aplicado
+        $data = dados do Vue para esse elemento
+        Ex.: posso alterar o valor dessa forma:
+        vm.$data.titulo = "Outro valor", que o Vue
+        irá manter a reatividade, alterando o valor no elemento.
+    */
+</script>
