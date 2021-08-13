@@ -10,16 +10,18 @@
 </template>
 
 <script>
+import barramento from '@/barramento';
+
 export default {
-    // props: {
-    //     usuario: {
-    //         id, nome, idade
-    //     }
-    // },
     data() {
         return {
             usuario: null
         }
+    },
+    created() {
+        barramento.onUsuarioSelecionado(usuario => {
+            this.usuario = usuario;
+        });
     }
 }
 </script>
