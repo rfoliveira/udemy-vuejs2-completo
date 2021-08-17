@@ -32,6 +32,29 @@
 <script>
 export default {
     // props: ['texto']
+    
+    // para mostrar que a cada mudança de
+    // componente, o mesmo é destruído e criado novamente
+    // --------------------------------------------------
+    // obs.: o vuejs desabilita por padrão o console.log
+    // logo para usar, ou define de window.console.log()
+    // ou muda no package.json acrescentando 
+    // "rules": { "no-console": "off" }
+    created() {
+        window.console.log('created');
+    },
+    destroyed() {
+        window.console.log('destroyed');
+    },
+    // com o uso de <keep-alive> deixa de ficar 
+    // criando / destruindo o componente para
+    // ativar / desativar
+    activated() {
+        window.console.log('activated')
+    },
+    deactivated() {
+        window.console.log('deactivated')
+    }
 }
 </script>
 

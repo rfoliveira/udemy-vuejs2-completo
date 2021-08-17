@@ -1,5 +1,11 @@
 <template>
 	<div id="app">
+		<!-- 
+			Nesse caso, como é passado um objeto, este é passado por referência e 
+			isso pode ser perigoso pois em seus filhos podem mudar a estrutura ou valor do objeto.
+			Para solucionar isso podemos passar uma cópia usando o operador spread
+			<usuario-lista :usuarios="[...usuarios]" />
+		-->
 		<usuario-lista :usuarios="usuarios" />
 		<usuario-detalhe />
 	</div>

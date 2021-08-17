@@ -14,11 +14,16 @@
 		<!--  uso de componente dinamico
 		nesse caso só está exibindo o componente Citacoes 
 		outra forma = <componente :is="'Citacoes'" />-->
-		<component :is="componente" />	
+		<!-- <component :is="componente" />	 -->
 		<!-- Obs: o professor do curso não usa
 		um método para funcionar. No dele
 		apenas atribuindo <button @click="componente = 'Citacoes'">...</button>
 		funciona -->
+		<!-- Para que o componente não seja destruído e criado 
+		a cada vez que entrar em sair, usar <keep-alive> -->
+		<keep-alive>
+			<component :is="componente" />
+		</keep-alive>
 	</div>
 </template>
 

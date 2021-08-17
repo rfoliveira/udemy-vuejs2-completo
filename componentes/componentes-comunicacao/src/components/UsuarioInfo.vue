@@ -74,6 +74,8 @@ export default {
             // para notificar o pai, deve-se definir um 
             // evento no pai e emitir para esse evento 
             // passando o objeto que está sendo alterado / definido
+            // essa passagem de parâmetro é por valor e não por referência 
+            // porque estamos passando um valor primitivo (string)
             this.$emit('nomeMudou', this.nome);
             // ou, caso um objeto
             // this.$emit('nomeMudou', {
@@ -89,6 +91,7 @@ export default {
         // barramento.$on('idadeMudou', idade => {
         //     this.idade = idade;
         // });
+        // em JS valores primitivos são passados por cópia e não por referência
         barramento.quandoIdadeMudar(idade => {
             this.idade = idade;
         });
