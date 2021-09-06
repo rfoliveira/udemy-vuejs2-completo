@@ -26,7 +26,7 @@
         <strong>E-mail: </strong>{{usuario.email}}<br />
         <strong>ID: </strong>{{ id }}<br />
         <b-button variant="warning" size="lg" @click="carregar(id)">Carregar</b-button>
-        <b-button variant="danger" size="ml-2" @click="excluir(id)">Excluir</b-button>
+        <b-button variant="danger" size="lg" @click="excluir(id)" class="ml-2">Excluir</b-button>
       </b-list-group-item>
     </b-list-group>
   </div>
@@ -71,20 +71,23 @@ export default {
       const metodo = this.id ? 'patch' : 'post'
       const finalUrl = this.id ? `/${this.id}.json` : '.json'
       this.$http[metodo](`/usuarios${finalUrl}`, this.usuario)
-        .then(_ => {
-          this.limpar()
+        .then(() => {
           this.mensagens.push({
             texto: 'Operação realizada com sucesso!',
-            tipo: 'sucess'
+            tipo: 'success'
           })
+          setTimeout(() => {
+            this.limpar()
+          }, 2000)
         })
+        .catch(err => console.error(err))
     },
     listar() {
       // this.$http.get('usuarios.json')
       this.$http('usuarios.json').then(res => { 
-        console.log(res)
         this.usuarios = res.data 
       })
+      .catch(err => console.error(err))
     },
     carregar(id) {
       this.id = id
@@ -94,7 +97,15 @@ export default {
     },
     excluir(id) {
       this.$http.delete(`/usuarios/${id}.json`)
-        .then(() => this.limpar())
+        .then(() => {
+          this.mensagens.push({
+            texto: 'Operação realizada com sucesso!',
+            tipo: 'success'
+          })
+          setTimeout(() => {
+            this.limpar()
+          }, 2000)
+        })
         .catch(err => {
           this.mensagens.push({
             texto: `Erro ao excluir: ${err.message}`,
@@ -105,7 +116,7 @@ export default {
     limpar() {
       this.usuario.nome = ''
       this.usuario.email = ''
-      this.usuario.id = null
+      this.id = null
       this.mensagens = []
     }
   }
