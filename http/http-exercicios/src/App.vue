@@ -1,16 +1,113 @@
 <template>
   <div id="app" class="container">
     <h1>HTTP com axios</h1>
+    <b-alert show dismissible v-for="msg in mensagens" :key="msg.texto" :variant="msg.tipo">
+      {{msg.texto}}
+    </b-alert>
+    <b-card>
+      <b-form-group label="Nome:">
+        <b-form-input type="text" size="lg"
+          v-model="usuario.nome"
+          placeholder="Informe o nome"></b-form-input>
+      </b-form-group>
+      <b-form-group label="E-mail:">
+        <b-form-input type="email" size="lg"
+          v-model="usuario.email"
+          placeholder="Informe o e-mail"></b-form-input>
+      </b-form-group>
+      <hr>
+      <b-button @click="salvar" size="lg" variant="primary">Salvar</b-button>
+      <b-button @click="listar" size="lg" variant="success" class="ml-2">Listar</b-button>
+    </b-card>
+    <hr>
+    <b-list-group>
+      <b-list-group-item v-for="(usuario, id) in usuarios" :key="id">
+        <strong>Nome: </strong>{{usuario.nome}}<br />
+        <strong>E-mail: </strong>{{usuario.email}}<br />
+        <strong>ID: </strong>{{ id }}<br />
+        <b-button variant="warning" size="lg" @click="carregar(id)">Carregar</b-button>
+        <b-button variant="danger" size="ml-2" @click="excluir(id)">Excluir</b-button>
+      </b-list-group-item>
+    </b-list-group>
   </div>
 </template>
 
 <script>
+// Para uso do azios localmente, basta importar ele e 
+// usar normalmente. Ex.:
+// import axios from 'axios'
+// Dentro do método:
+// axios.post(...), etc...
 export default {
-  created() {
-    this.$http.post('usuarios.json', {
-      nome: 'Naria',
-      email: 'maria_silva@teste.com'
-    }).then(res => console.log(res))
+  // Apenas teste
+  // created() {
+  //   this.$http.post('usuarios.json', {
+  //     nome: 'Naria',
+  //     email: 'maria_silva@teste.com'
+  //   }).then(res => console.log(res))
+  // }
+  data() {
+    return {
+      usuario: {
+        nome: '',
+        email: ''
+      },
+      usuarios: [],
+      id: null,
+      mensagens: []
+    }
+  },
+  methods: {
+    salvar() {
+      // console.log(this.usuario)
+      // this.$http.post('usuarios.json', this.usuario)
+      //   .then(res => {
+      //     this.limpar()
+      //     // console.log(res)
+      //   })
+      //   .catch(err => console.error(err))
+
+      // considerando tandto "patch" como "post"
+      const metodo = this.id ? 'patch' : 'post'
+      const finalUrl = this.id ? `/${this.id}.json` : '.json'
+      this.$http[metodo](`/usuarios${finalUrl}`, this.usuario)
+        .then(_ => {
+          this.limpar()
+          this.mensagens.push({
+            texto: 'Operação realizada com sucesso!',
+            tipo: 'sucess'
+          })
+        })
+    },
+    listar() {
+      // this.$http.get('usuarios.json')
+      this.$http('usuarios.json').then(res => { 
+        console.log(res)
+        this.usuarios = res.data 
+      })
+    },
+    carregar(id) {
+      this.id = id
+      // Para não alterar a instância atual, 
+      // crio um novo objeto
+      this.usuario = { ...this.usuarios[id] }
+    },
+    excluir(id) {
+      this.$http.delete(`/usuarios/${id}.json`)
+        .then(() => this.limpar())
+        .catch(err => {
+          this.mensagens.push({
+            texto: `Erro ao excluir: ${err.message}`,
+            tipo: 'danger'
+          })
+        })
+    },
+    limpar() {
+      this.usuario.nome = ''
+      this.usuario.email = ''
+      this.usuario.id = null
+      this.mensagens = []
+    }
   }
 }
 </script>
