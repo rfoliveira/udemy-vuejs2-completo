@@ -72,6 +72,10 @@ export default {
       const finalUrl = this.id ? `/${this.id}.json` : '.json'
       this.$http[metodo](`/usuarios${finalUrl}`, this.usuario)
         .then(() => {
+          // this.usuarios.push({
+          //   id: res.data.name,
+          //   ...this.usuario
+          // })
           this.mensagens.push({
             texto: 'Operação realizada com sucesso!',
             tipo: 'success'
@@ -85,7 +89,7 @@ export default {
     listar() {
       // this.$http.get('usuarios.json')
       this.$http('usuarios.json').then(res => { 
-        this.usuarios = res.data 
+        this.usuarios = res.data
       })
       .catch(err => console.error(err))
     },
@@ -96,22 +100,33 @@ export default {
       this.usuario = { ...this.usuarios[id] }
     },
     excluir(id) {
-      this.$http.delete(`/usuarios/${id}.json`)
-        .then(() => {
-          this.mensagens.push({
-            texto: 'Operação realizada com sucesso!',
-            tipo: 'success'
+      // const idx = this.usuarios?.findIndex(u => u.id === id)
+      
+      // if (!idx) {
+      //   this.mensagens.push({
+      //     texto: 'Usuário não encontrado',
+      //     tipo: 'danger'
+      //   })
+      // }
+      // else {
+        this.$http.delete(`/usuarios/${id}.json`)
+          .then(() => {
+            // this.usuarios.splice(idx, 1)
+            this.mensagens.push({
+              texto: 'Operação realizada com sucesso!',
+              tipo: 'success'
+            })
+            setTimeout(() => {
+              this.limpar()
+            }, 2000)
           })
-          setTimeout(() => {
-            this.limpar()
-          }, 2000)
-        })
-        .catch(err => {
-          this.mensagens.push({
-            texto: `Erro ao excluir: ${err.message}`,
-            tipo: 'danger'
+          .catch(err => {
+            this.mensagens.push({
+              texto: `Erro ao excluir: ${err.message}`,
+              tipo: 'danger'
+            })
           })
-        })
+      // }      
     },
     limpar() {
       this.usuario.nome = ''

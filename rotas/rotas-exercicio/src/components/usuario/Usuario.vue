@@ -2,9 +2,7 @@
     <div class="usuario">
         <h2>Usuário</h2>
         <hr>
-        <p>
-            <strong>Código:</strong> {{ id }}
-        </p>
+        <router-view />
         <button sucesso @click="irParaInicio">Voltar ao início</button>
     </div>
 </template>
@@ -13,9 +11,11 @@
 export default {
     methods: {
         irParaInicio() {
-            this.$router.push('/')
+            // this.$router.push('/')
             // pode ser dessa forma também
             // this.$router.push({ path: '/' })
+            // Usando rotas nomeadas
+            this.$router.push({ name: 'inicio' })
         }
     },
     // data() {
@@ -34,7 +34,7 @@ export default {
     // }
     // Usando propriedades ao invés de parâmetros
     // Nesse caso não precisa de watchers
-    props: ['id']
+    // props: ['id']
 }
 </script>
 
