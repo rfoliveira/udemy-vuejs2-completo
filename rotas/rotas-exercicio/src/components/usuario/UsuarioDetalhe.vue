@@ -27,7 +27,9 @@
                 query: {
                     completo: true,
                     lingua: 'pt'
-                }}">
+                },
+                hash: '#rodape'
+            }">
             Editar
         </router-link>
     </div>
@@ -35,7 +37,23 @@
 
 <script>
 export default {
-    props: ['id']
+    props: ['id'],
+    // Outra forma de atribuir uma ação ao acessar a rota.
+    // Nesse ponto não consigo acessar propriedade nenhuma do componente (com "this"),
+    // porque o mesmo ainda não foi criado.
+    // Para conseguir acessar, preciso colocar dentro de uma função callback em next
+    beforeRouteEnter(to, from, next) {
+        // Faz alguma coisa
+        next()
+
+        // Acessando as propriedades do compomente
+        // Nesse caso, o componente já foi criado (não é usual)
+        // next(vm => {
+        //     // Nesse caso, vai imprimir a propriedade "id"
+        //     // no console
+        //     console.log(vm.id)
+        // })
+    }
 }
 </script>
 
