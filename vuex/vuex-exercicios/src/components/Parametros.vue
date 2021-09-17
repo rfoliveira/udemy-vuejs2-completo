@@ -3,11 +3,11 @@
         <div class="parametros">
             <span>
                 <strong>Quantidade Padrão: </strong>
-                <input type="number" v-model.number="quantidade">
+                <input type="number" v-model="quantidade">
             </span>
             <span>
                 <strong>Preço Padrão: </strong>
-                <input type="number" v-model.number="preco">
+                <input type="number" v-model="preco">
             </span>
         </div>
     </Painel>
@@ -15,10 +15,26 @@
 
 <script>
 export default {
-    data() {
-        return {
-            quantidade: 0,
-            preco: 0
+    computed: {
+        quantidade: {
+            get() {
+                // return this.$store.state.quantidade
+                // Melhor organizado
+                return this.$store.state.parametros.quantidade
+            },
+            set(valor) {
+                this.$store.commit('setQuantidade', valor)
+            }
+        },
+        preco: {
+            get() {
+                // return this.$store.state.preco
+                // Mlehor organizado
+                return this.$store.state.parametros.preco
+            },
+            set(valor) {
+                this.$store.commit('setPreco', valor)
+            }
         }
     }
 }

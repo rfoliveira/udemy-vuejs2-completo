@@ -26,38 +26,32 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
-export default { 
+export default {
     computed: {
-        // total() {
-        //     // Ref.: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
-        //     // A função reduce possui a seguinte sintaxe:
-        //     // array.reduce(callback( acumulador, valorAtual[, index[, array]] )[, valorInicial]))
-        //     // return this.produtos.map(p => p.quantidade * p.preco)
-        //     //     .reduce((total, atual) => total + atual, 0)
-
-        //     return this.$store.getters.valorTotal
-        // },
-        ...mapGetters({
-            total: 'valorTotal'
-        }),
-        produtos() {
-            // return this.$store.state.produtos
-            // Mlehor organizado
-            return this.$store.state.carrinho.produtos
+        total() {
+            return this.produtos.map(p => p.quantidade * p.preco)
+                .reduce((total, atual) => total + atual, 0)
         }
-    }    
+    },
+    data() {
+        return {
+            produtos: [
+                { id: 1, nome: 'Produto 1', quantidade: 7, preco: 14.55 },
+                { id: 2, nome: 'Produto 2', quantidade: 10, preco: 22.99 },
+                { id: 3, nome: 'Produto 3', quantidade: 1, preco: 43.18 },
+            ]
+        }
+    }
 }
 </script>
 
 <style>
     table {
-        width: 100%
+        width: 100%;
     }
 
     td {
-        border-top: 1px solid #eee;
+        border-top: 1px solid #EEE;
         width: 33%;
     }
 
