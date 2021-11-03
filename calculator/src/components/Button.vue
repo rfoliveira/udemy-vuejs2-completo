@@ -2,7 +2,7 @@
     <!-- { double, triple, operation }, é o mesmo que
     verificar double ? double : triple ? triple : operation ? operation : false
     que, sendo falso não aplicará a classe -->
-    <button class="button" :class="{ double, triple, operation }">
+    <button class="button" :class="{ double, triple, operation }" @click="doClick">
         {{ label }}
     </button>
 </template>
@@ -14,6 +14,11 @@ export default {
         operation: { type: Boolean },
         double: { type: Boolean },
         triple: { type: Boolean }
+    },
+    methods: {
+        doClick() {
+            this.$emit('onClick', this.label)
+        }
     }
 }
 </script>
