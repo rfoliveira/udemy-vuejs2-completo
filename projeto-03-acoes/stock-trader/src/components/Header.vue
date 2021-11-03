@@ -23,7 +23,7 @@ mas a versão dele era outra -->
                     </template>
                     <v-list>
                         <v-list-item @click="saveData">Salvar Dados</v-list-item>
-                        <v-list-item>Carregar Dados</v-list-item>
+                        <v-list-item @click="loadDataLocal">Carregar Dados</v-list-item>
                     </v-list>
                     <!-- Dá no mesmo se fizer 
                     <v-list><v-list-item><v-list-item-title>
@@ -50,7 +50,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['randomizeStocks']),
+        ...mapActions(['randomizeStocks', 'loadData']),
         endDay() {
             this.randomizeStocks()
         },
@@ -58,6 +58,11 @@ export default {
             const { funds, stockPortifolio, stocks } = this.$store.getters
 
             this.$http.put('data.json', { funds, stockPortifolio, stocks })
+        },
+        loadDataLocal() {
+            // para não conflitar com o método da action (loadData)
+            // o nome precisa ser diferente
+            this.loadData()
         }
     }
 }

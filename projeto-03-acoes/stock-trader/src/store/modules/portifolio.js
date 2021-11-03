@@ -36,6 +36,10 @@ export default {
             }
 
             state.funds += stockPrice * quantity
+        },
+        setPortifolio(state, portifolio) {
+            state.funds = portifolio.funds
+            state.stocks = portifolio.stockPortifolio ?? []
         }
     },
     actions: {
