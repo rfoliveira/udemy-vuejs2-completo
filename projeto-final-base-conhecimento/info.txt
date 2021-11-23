@@ -4,4 +4,8 @@ Projeto do instrutor, versão final e inicial, arquivo "knowledge-master.zip".
 Fiz em repositório privado separado devido o acesso aos bancos mongodb (atlas) e postgresql (heroku)
 Repositórios privados criados:
 - https://github.com/rfoliveira/knowledge-frontend.git
-- https://github.com/rfoliveira/knowledge-backend.git 
+- https://github.com/rfoliveira/knowledge-backend.git - https://git.heroku.com/knowledge-be-20211116-app.git
+
+Repos no heroku
+- back = https://git.heroku.com/knowledge-be-20211116-app.git
+- front = https://git.heroku.com/knowledge-fe-20211116-app.git
