@@ -1,0 +1,36 @@
+<!-- Este arquivpo é para mostrar o uso de v-once,
+mas ao atualizar a página não ocorre do texto ficar igual
+como o instrutor faz, ficando sem atualizar ambas, só o título mesmo -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <p v-once>{{ titulo }}</p>
+  <p>{{ saudacao() }}</p>
+  <a :href="link">Google</a>
+</div>
+
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        titulo: "Usando VueJS",
+        link: "https://google.com",
+      };
+    },
+    methods: {
+      /*
+      dessa forma nào precisa de v-once
+      saudacao: () => {
+        this.titulo = "Fala aí";
+        return this.titulo;
+      },*/
+      // Assim precisa
+      saudacao() {
+        this.titulo = "Fala aí";
+        return this.titulo;
+      },
+    },
+  }).mount("#app");
+</script>

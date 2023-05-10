@@ -1,0 +1,32 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <p>{{ titulo }}</p>
+  <p>{{ saudacao() }}</p>
+</div>
+
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        titulo: "Usando VueJS",
+      };
+    },
+    methods: {
+      saudacao: () => "fala aí",
+      /*
+      outra forma:
+      saudacao() {
+        return "Fala aí"
+      }
+
+      outra forma:
+      saudacao: function() {
+        return "Fala aí"
+      }
+      */
+    },
+  }).mount("#app");
+</script>

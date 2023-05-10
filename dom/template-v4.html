@@ -1,0 +1,23 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <p>{{ titulo }}</p>
+  <p>{{ saudacao() }}</p>
+  <a :href="link">Google</a>
+</div>
+
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        titulo: "Usando VueJS",
+        link: "https://google.com",
+      };
+    },
+    methods: {
+      saudacao: () => "fala aí",
+    },
+  }).mount("#app");
+</script>
