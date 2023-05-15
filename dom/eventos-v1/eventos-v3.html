@@ -1,0 +1,35 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <p>{{ contador }}</p>
+  <button @click="somar">Somar 1</button>
+  <p @mousemove="alteraXY">Mouse {{x}} e {{y}}</p>
+  <button @click="somar(5)">Somar 5</button>
+</div>
+
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        contador: 0,
+        x: 0,
+        y: 0,
+      };
+    },
+    methods: {
+      // por ser usada em um evento, estes metodos
+      // ter event disponível para uso
+      somar(num) {
+        this.contador += +num || 1;
+      },
+      // para fins de facilidade de manutençao,
+      // recomenda-se colocar event no parâmetro
+      alteraXY(event) {
+        this.x = event.clientX;
+        this.y = event.clientY;
+      },
+    },
+  }).mount("#app");
+</script>

@@ -1,0 +1,32 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="desafio">
+  <!-- 1) Exiba um alert quando o botão for clicado -->
+  <div>
+    <button @click="showAlert">Exibir Alerta</button>
+  </div>
+
+  <!-- 2) Escute o evento "keydown" e armazene o valor na propriedade
+        data (dica: event.target.value) -->
+  <div>
+    <input type="text" @keyup="myKeyUp" />
+    <p>{{ valor }}</p>
+  </div>
+
+  <!-- 3) Ajuste o exemplo 2 para disparar o evento "keydown" somente
+        quando a tecla for ENTER -->
+  <div>
+    <p>Disparando apenas com o enter</p>
+    <input type="text" @keyup.enter="myKeyUp" />
+    <p>{{ valor }}</p>
+  </div>
+</div>
+<script src="app.js"></script>
+
+<!-- 
+    Obs.: ao usar o keydown, não está pegando o último
+    caracter pressionado. Usando keyup, isso não acontece.
+    de outra forma, podemos usar diretamente sem usar um m[etodo para o keyup:
+    <input type="text" @keyup="valor = $event.target.value" />
+
+ -->
