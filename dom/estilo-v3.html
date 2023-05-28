@@ -1,0 +1,65 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<style>
+  .caixas {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .demo {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+  }
+
+  .c1 {
+    background-color: red;
+  }
+
+  .c2 {
+    background-color: green;
+  }
+
+  .c3 {
+    background-color: blue;
+  }
+
+</style>
+
+<div id="app">
+  <div class="caixas">
+    <div class="demo" 
+      :class="estiloAgregado"
+      @click="aplicarC1 = !aplicarC1"></div>
+    <div class="demo"></div>
+    <div class="demo" :class="classCSS"></div>  
+  </div>  
+  <hr>
+  <!-- Atribuição dinâmica via propriedade -->
+  <input type="text" :value="classCSS">
+</div>
+
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        aplicarC1: false,
+        aplicarAmarelo: false,
+        classCSS: 'c1'
+      }
+    },
+    computed: {
+      // Dessa forma fica melhor de se usar 
+      // quando é mais de 1 classe, ao invés de 
+      // <div :class="{ c1: aplicarC1, c2: !aplicarC1 }"></div>
+      estiloAgregado() {
+        return {
+          c1: this.aplicarC1,
+          c2: !this.aplicarC1
+        }
+      }
+    }
+  }).mount("#app")
+</script>

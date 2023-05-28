@@ -1,0 +1,70 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<style>
+  #app {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .demo {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+  }
+
+  .c1 {
+    background-color: red;
+  }
+
+  .c2 {
+    background-color: green;
+  }
+
+  .c3 {
+    background-color: blue;
+  }
+
+  /* 
+  caso o nome tenha algum separador, 
+  quando for usado precisa colocar entre aspas 
+  */
+  .cor-1 {
+    background-color: yellow;
+  }
+
+</style>
+
+<div id="app">
+  <div class="demo" 
+    :class="estiloAgregado"
+    @click="aplicarC1 = !aplicarC1"></div>
+  <div class="demo"
+    :class="{'cor-1': aplicarAmarelo}"
+    @click="aplicarAmarelo = !aplicarAmarelo"
+  ></div>
+  <div class="demo"></div>
+</div>
+
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        aplicarC1: false,
+        aplicarAmarelo: false
+      }
+    },
+    computed: {
+      // Dessa forma fica melhor de se usar 
+      // quando é mais de 1 classe, ao invés de 
+      // <div :class="{ c1: aplicarC1, c2: !aplicarC1 }"></div>
+      estiloAgregado() {
+        return {
+          c1: this.aplicarC1,
+          c2: !this.aplicarC1
+        }
+      }
+    }
+  }).mount("#app")
+</script>
